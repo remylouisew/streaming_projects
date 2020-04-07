@@ -7,6 +7,7 @@
 #   sudo apt-get update
 #   sudo apt-get install python3.7
 #   2) put your twitter developer tokens/secrets in a GCS bucket (or copy them to the VM by some other means)
+#   3) execute:
 
 import tweepy
 from google.cloud import pubsub_v1
@@ -66,7 +67,7 @@ stream.filter(track=lst_hashtags)
 
 # Send the data to PubSub
 MY_PROJECT = "twitter-stream-rw"
-MY_PUBSUB_TOPIC = 
+MY_PUBSUB_TOPIC = "twitter1"
 
 # Configure the connection
 publisher = pubsub_v1.PublisherClient()
