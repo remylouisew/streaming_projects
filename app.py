@@ -2,12 +2,15 @@
 #   Author: Remy Welch 
 #
 # Steps:
-#   1) create VM on GCP (n1standard2), use initialization script in install python: 	
+#   1) create VM on GCP (n1standard2), use initialization script in install python/git: 	
 #   !  /bin/bash
 #   sudo apt-get update
 #   sudo apt-get install python3.7
+#   sudo apt-get update
+#   sudo apt-get install git
 #   2) put your twitter developer tokens/secrets in a GCS bucket (or copy them to the VM by some other means)
-#   3) execute:
+#   3) execute: git clone https://github.com/remylouisew/twitter_streaming.git
+#   4) NEXT: run this file from (find path)...see if it works
 
 import tweepy
 from google.cloud import pubsub_v1
