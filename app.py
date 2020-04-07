@@ -1,28 +1,41 @@
+#   Created: 04/07/20
+#   Author: Remy Welch 
+#
+# Steps:
+#   1) create VM on GCP (n1standard2), use initialization script in install python: 	
+#   !  /bin/bash
+#   sudo apt-get update
+#   sudo apt-get install python3.7
+#   2) put your twitter developer tokens/secrets in a GCS bucket (or copy them to the VM by some other means)
+
 import tweepy
 from google.cloud import pubsub_v1
 
 
-with open(gs://mycredentials-rw/key.txt) as f:
-  MYKEY = f.read()
-with open(gs://mycredentials-rw/keysecret.txt) as f:
-  MYKEYSECRET = f.read()
-with open(gs://mycredentials-rw/token.txt) as f:
-  MYTOKEN = f.read()
-with open(gs://mycredentials-rw/tokensecret.txt) as f:
-  MYTOKENSECRET = f.read()
+with open(gs://mycredentials-rw/key.txt) as a:
+  MYKEY = a.read()
+with open(gs://mycredentials-rw/keysecret.txt) as b:
+  MYKEYSECRET = b.read()
+with open(gs://mycredentials-rw/token.txt) as c:
+  MYTOKEN = c.read()
+with open(gs://mycredentials-rw/tokensecret.txt) as d:
+  MYTOKENSECRET = d.read()
   
-MYKEYSECRET = gs://mycredentials-rw/xxx
-MYTOKEN = gs://mycredentials-rw/token.txt
-MYTOKENSECRET = gs://mycredentials-rw/
 
 #!gsutil cp $MYKEY 
 
 # Authenticate
-auth = tweepy.OAuthHandler(YOURKEY, YOURSECRET)
-auth.set_access_token(YOURKEY, YOURSECRET)
+auth = tweepy.OAuthHandler($MYKEY, $MYKEYSECRET)
+auth.set_access_token($MYTOKEN, $MYTOKENSECRET)
 
 # Configure to wait on rate limit if necessary
 api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=False)
+
+try:
+    api.verify_credentials()
+    print("Authentication OK")
+except:
+    print("Error during authentication")
 
 # Hashtag list
 lst_hashtags = ["#got", "#gameofthrones"]
@@ -49,3 +62,29 @@ l = TweetListener()
 # Start streaming
 stream = tweepy.Stream(auth, l, tweet_mode='extended')
 stream.filter(track=lst_hashtags)
+
+
+# Send the data to PubSub
+MY_PROJECT = "twitter-stream-rw"
+MY_PUBSUB_TOPIC = 
+
+# Configure the connection
+publisher = pubsub_v1.PublisherClient()
+topic_path = publisher.topic_path($MY_PROJECT, $MY_PUBSUB_TOPIC)
+
+# Function to write data to
+def write_to_pubsub(data):
+    try:
+        if data["lang"] == "en":
+          
+            # publish to the topic, don't forget to encode everything at utf8!
+            publisher.publish(topic_path, data=json.dumps({
+                "text": data["text"],
+                "user_id": data["user_id"],
+                "id": data["id"],
+                "posted_at": datetime.datetime.fromtimestamp(data["created_at"]).strftime('%Y-%m-%d %H:%M:%S')
+            }).encode("utf-8"), tweet_id=str(data["id"]).encode("utf-8"))
+            
+    except Exception as e:
+        print(e)
+        raise
