@@ -17,10 +17,13 @@
 #   4) run this file: $python3 /home/remyw/twitter_streaming/app.py
 #   4) NEXT: run this file from (find path)...see if it works
 
-
+import datetime
+import json
+import time
 import tweepy
 from google.cloud import pubsub_v1 as pub
 from google.cloud import storage as gcs
+from tweepy.streaming import StreamListener
 
 #!gsutil cp -r gs://mycredentials-rw/keysecret.txt /home/remyw/keysecret.txt
 #!gsutil cp -r gs://mycredentials-rw/token.txt /home/remyw/token.txt
@@ -62,7 +65,7 @@ class TweetListener(StreamListener):
 
     def on_status(self, data):
         # When receiveing a tweet: send it to pubsub
-        write_to_pubsub(reformat_tweet(data._json))
+        write_to_pubsub(data._json)
         return True
 
     def on_error(self, status):
