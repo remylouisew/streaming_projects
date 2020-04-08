@@ -57,15 +57,19 @@ except:
 # Hashtag list
 lst_hashtags = ["#got", "#gameofthrones"]
 
-# Listener class
-class TweetListener(StreamListener):
+#Custom Listener class
+class StdOutListener(StreamListener):
+    """ A listener handles tweets that are received from the stream.
+    This is a basic listener that just pushes tweets to pubsub
+    """
 
     def __init__(self):
         super(StdOutListener, self).__init__()
+        self._counter = 0
 
     def on_status(self, data):
-        # When receiveing a tweet: send it to pubsub
         write_to_pubsub(data._json)
+        self._counter += 1
         return True
 
     def on_error(self, status):
@@ -74,7 +78,7 @@ class TweetListener(StreamListener):
             return False
           
 # Make an instance of the class
-l = TweetListener()
+l = StdOutListener()
 
 # Start streaming
 stream = tweepy.Stream(auth, l, tweet_mode='extended')
