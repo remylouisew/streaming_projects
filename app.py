@@ -20,7 +20,7 @@ import cloudstorage as gcs
 #!gsutil cp -r gs://mycredentials-rw/key.txt /home/remyw/key.txt
   #MYKEY = a.read()
   
- with gcs.open("gs://mycredentials-rw/key.txt") as a:
+with gcs.open("gs://mycredentials-rw/key.txt") as a:
   MYKEY = a.read() 
 with gcs.open("gs://mycredentials-rw/keysecret.txt") as b:
   MYKEYSECRET = b.read()
