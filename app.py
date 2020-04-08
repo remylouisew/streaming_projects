@@ -33,8 +33,8 @@ with gcs.open("gs://mycredentials-rw/tokensecret.txt") as d:
 #!gsutil cp $MYKEY 
 
 # Authenticate
-auth = tweepy.OAuthHandler($MYKEY, $MYKEYSECRET)
-auth.set_access_token($MYTOKEN, $MYTOKENSECRET)
+auth = tweepy.OAuthHandler(MYKEY, MYKEYSECRET)
+auth.set_access_token(MYTOKEN, MYTOKENSECRET)
 
 # Configure to wait on rate limit if necessary
 api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=False)
@@ -78,7 +78,7 @@ MY_PUBSUB_TOPIC = "twitter1"
 
 # Configure the connection
 publisher = pubsub_v1.PublisherClient()
-topic_path = publisher.topic_path($MY_PROJECT, $MY_PUBSUB_TOPIC)
+topic_path = publisher.topic_path(MY_PROJECT, MY_PUBSUB_TOPIC)
 
 # Function to write data to
 def write_to_pubsub(data):
