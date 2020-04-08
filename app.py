@@ -21,7 +21,7 @@ import datetime
 import json
 import time
 import tweepy
-from google.cloud import pubsub_v1 as pub
+from google.cloud import pubsub_v1
 from google.cloud import storage as gcs
 from tweepy.streaming import StreamListener
 
