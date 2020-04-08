@@ -26,13 +26,13 @@ from google.cloud import storage as gcs
 #!gsutil cp -r gs://mycredentials-rw/token.txt /home/remyw/token.txt
 #!gsutil cp -r gs://mycredentials-rw/tokensecret.txt /home/remyw/tokensecret.txt
   
-with open("/home/remyw/keys/key.txt") as a:
+with open("/home/remyw/keys/mycredentials-rw/key.txt") as a:
   MYKEY = a.read() 
-with gcs.open("/home/remyw/keys/keysecret.txt") as b:
+with open("/home/remyw/keys/mycredentials-rw/keysecret.txt") as b:
   MYKEYSECRET = b.read()
-with gcs.open("/home/remyw/keys/token.txt") as c:
+with open("/home/remyw/keys/mycredentials-rw/token.txt") as c:
   MYTOKEN = c.read()
-with gcs.open("/home/remyw/keys/tokensecret.txt") as d:
+with open("/home/remyw/keys/mycredentials-rw/tokensecret.txt") as d:
   MYTOKENSECRET = d.read()
   
 
