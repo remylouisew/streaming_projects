@@ -1,5 +1,7 @@
 #   Created: 04/07/20
 #   Author: Remy Welch 
+
+#   Tweet documentation: https://developer.twitter.com/en/docs/tweets/curate-a-collection/api-reference/get-collections-entries
 #
 # Steps:
 #   1) create VM on GCP (n1standard2), use initialization script in install python/git: 	
@@ -12,6 +14,7 @@
 #   pip3 install google-cloud-pubsub
 #   mkdir /home/remyw/keys
 #   gsutil cp -r gs://mycredentials-rw/ /home/remyw/keys
+#   1.5) Use service account twitter-access...VM needs pubsub editor access, etc (just went ahead and gave it project editor access)
 #   2) put your twitter developer tokens/secrets in a GCS bucket (or copy them to the VM by some other means)
 #   3) execute: git clone https://github.com/remylouisew/twitter_streaming.git
 #   4) run this file: $python3 /home/remyw/twitter_streaming/app.py
@@ -76,7 +79,6 @@ def write_to_pubsub(data):
                 "user": data["user"],
                 "id": data["id"],
                 "place": data["place"] if data["place"] else None,
-                "country_code": data["country_code"] if data["place"] else None,
                 "retweeted_status": data["retweeted_status"] if "retweeted_status" in data else None,
                 "favorite_count": data["favorite_count"] if "favorite_count" in data else 0,
                 "retweet_count": data["retweet_count"] if "retweet_count" in data else 0,
