@@ -10,19 +10,20 @@
 #   sudo apt-get install git
 #   2) put your twitter developer tokens/secrets in a GCS bucket (or copy them to the VM by some other means)
 #   3) execute: git clone https://github.com/remylouisew/twitter_streaming.git
+#   4) run this file: $python3 /home/remyw/twitter_streaming/app.py
 #   4) NEXT: run this file from (find path)...see if it works
 
 import tweepy
 from google.cloud import pubsub_v1
 
 
-with open(gs://mycredentials-rw/key.txt) as a:
+with open("gs://mycredentials-rw/key.txt") as a:
   MYKEY = a.read()
-with open(gs://mycredentials-rw/keysecret.txt) as b:
+with open("gs://mycredentials-rw/keysecret.txt") as b:
   MYKEYSECRET = b.read()
-with open(gs://mycredentials-rw/token.txt) as c:
+with open("gs://mycredentials-rw/token.txt") as c:
   MYTOKEN = c.read()
-with open(gs://mycredentials-rw/tokensecret.txt) as d:
+with open("gs://mycredentials-rw/tokensecret.txt") as d:
   MYTOKENSECRET = d.read()
   
 
