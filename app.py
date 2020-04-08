@@ -21,16 +21,19 @@ import tweepy
 from google.cloud import pubsub_v1 as pub
 from google.cloud import storage as gcs
 
-#!gsutil cp -r gs://mycredentials-rw/key.txt /home/remyw/key.txt
-  #MYKEY = a.read()
+!mkdir /home/remyw/keys
+!gsutil cp -r gs://mycredentials-rw/ /home/remyw/keys
+#!gsutil cp -r gs://mycredentials-rw/keysecret.txt /home/remyw/keysecret.txt
+#!gsutil cp -r gs://mycredentials-rw/token.txt /home/remyw/token.txt
+#!gsutil cp -r gs://mycredentials-rw/tokensecret.txt /home/remyw/tokensecret.txt
   
-with gcs.open("gs://mycredentials-rw/key.txt") as a:
+with open("/home/remyw/keys/key.txt") as a:
   MYKEY = a.read() 
-with gcs.open("gs://mycredentials-rw/keysecret.txt") as b:
+with gcs.open("/home/remyw/keys/keysecret.txt") as b:
   MYKEYSECRET = b.read()
-with gcs.open("gs://mycredentials-rw/token.txt") as c:
+with gcs.open("/home/remyw/keys/token.txt") as c:
   MYTOKEN = c.read()
-with gcs.open("gs://mycredentials-rw/tokensecret.txt") as d:
+with gcs.open("/home/remyw/keys/tokensecret.txt") as d:
   MYTOKENSECRET = d.read()
   
 
