@@ -57,6 +57,32 @@ except:
 # Hashtag list
 lst_hashtags = ["#got", "#gameofthrones"]
 
+# Send the data to PubSub
+MY_PROJECT = "twitter-stream-rw"
+MY_PUBSUB_TOPIC = "twitter1"
+
+# Configure the connection
+publisher = pubsub_v1.PublisherClient()
+topic_path = publisher.topic_path(MY_PROJECT, MY_PUBSUB_TOPIC)
+
+# Function to write data to
+def write_to_pubsub(data):
+    try:
+        if data["lang"] == "en":
+          
+            # publish to the topic, don't forget to encode everything at utf8!
+            publisher.publish(topic_path, data=json.dumps({
+                "text": data["text"],
+                "user_id": data["user_id"],
+                "id": data["id"],
+                "posted_at": datetime.datetime.fromtimestamp(data["created_at"]).strftime('%Y-%m-%d %H:%M:%S')
+            }).encode("utf-8"), tweet_id=str(data["id"]).encode("utf-8"))
+            
+    except Exception as e:
+        print(e)
+        raise
+        
+
 #Custom Listener class
 class StdOutListener(StreamListener):
     """ A listener handles tweets that are received from the stream.
@@ -84,28 +110,3 @@ l = StdOutListener()
 stream = tweepy.Stream(auth, l, tweet_mode='extended')
 stream.filter(track=lst_hashtags)
 
-
-# Send the data to PubSub
-MY_PROJECT = "twitter-stream-rw"
-MY_PUBSUB_TOPIC = "twitter1"
-
-# Configure the connection
-publisher = pubsub_v1.PublisherClient()
-topic_path = publisher.topic_path(MY_PROJECT, MY_PUBSUB_TOPIC)
-
-# Function to write data to
-def write_to_pubsub(data):
-    try:
-        if data["lang"] == "en":
-          
-            # publish to the topic, don't forget to encode everything at utf8!
-            publisher.publish(topic_path, data=json.dumps({
-                "text": data["text"],
-                "user_id": data["user_id"],
-                "id": data["id"],
-                "posted_at": datetime.datetime.fromtimestamp(data["created_at"]).strftime('%Y-%m-%d %H:%M:%S')
-            }).encode("utf-8"), tweet_id=str(data["id"]).encode("utf-8"))
-            
-    except Exception as e:
-        print(e)
-        raise
