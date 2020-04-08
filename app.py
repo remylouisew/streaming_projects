@@ -73,9 +73,15 @@ def write_to_pubsub(data):
             # publish to the topic, don't forget to encode everything at utf8!
             publisher.publish(topic_path, data=json.dumps({
                 "text": data["text"],
-                "user_id": data["user_id"],
+                "user": data["user"],
                 "id": data["id"],
-                "posted_at": datetime.datetime.fromtimestamp(data["created_at"]).strftime('%Y-%m-%d %H:%M:%S')
+                "place": data["place"] if data["place"] else None,
+                "country_code": data["country_code"] if data["place"] else None,
+                "retweeted_status": data["retweeted_status"] if "retweeted_status" in data else None,
+                "favorite_count": data["favorite_count"] if "favorite_count" in data else 0,
+                "retweet_count": data["retweet_count"] if "retweet_count" in data else 0,
+                "coordinates": data["coordinates"],
+                "created_at": time.mktime(time.strptime(data["created_at"], "%a %b %d %H:%M:%S +0000 %Y"))
             }).encode("utf-8"), tweet_id=str(data["id"]).encode("utf-8"))
             
     except Exception as e:
