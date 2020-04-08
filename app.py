@@ -8,7 +8,9 @@
 #   sudo apt-get install python3-pip
 #   sudo apt-get update
 #   sudo apt-get install git
-#   pip install tweepy
+#   pip3 install tweepy
+#   pip3 install google-cloud-storage
+#   pip3 install google-cloud-pubsub
 #   2) put your twitter developer tokens/secrets in a GCS bucket (or copy them to the VM by some other means)
 #   3) execute: git clone https://github.com/remylouisew/twitter_streaming.git
 #   4) run this file: $python3 /home/remyw/twitter_streaming/app.py
@@ -16,8 +18,8 @@
 
 
 import tweepy
-from google.cloud import pubsub_v1
-import cloudstorage as gcs
+from google.cloud import pubsub_v1 as pub
+from google.cloud import storage as gcs
 
 #!gsutil cp -r gs://mycredentials-rw/key.txt /home/remyw/key.txt
   #MYKEY = a.read()
