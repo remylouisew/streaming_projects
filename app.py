@@ -15,15 +15,18 @@
 
 import tweepy
 from google.cloud import pubsub_v1
+import cloudstorage as gcs
 
-
-with open("gs://mycredentials-rw/key.txt") as a:
-  MYKEY = a.read()
-with open("gs://mycredentials-rw/keysecret.txt") as b:
+#!gsutil cp -r gs://mycredentials-rw/key.txt /home/remyw/key.txt
+  #MYKEY = a.read()
+  
+ with gcs.open("gs://mycredentials-rw/key.txt") as a:
+  MYKEY = a.read() 
+with gcs.open("gs://mycredentials-rw/keysecret.txt") as b:
   MYKEYSECRET = b.read()
-with open("gs://mycredentials-rw/token.txt") as c:
+with gcs.open("gs://mycredentials-rw/token.txt") as c:
   MYTOKEN = c.read()
-with open("gs://mycredentials-rw/tokensecret.txt") as d:
+with gcs.open("gs://mycredentials-rw/tokensecret.txt") as d:
   MYTOKENSECRET = d.read()
   
 
