@@ -1,24 +1,28 @@
 #   Created: 04/07/20
 #   Author: Remy Welch 
 
+'''
 #   Tweet documentation: https://developer.twitter.com/en/docs/tweets/curate-a-collection/api-reference/get-collections-entries
 #
 # Steps:
-#   1) create VM on GCP (n1standard2), use initialization script in install python/git: 	
-#   !  /bin/bash
-#   sudo apt-get update
-#   sudo apt-get install python3-pip
-#   sudo apt-get install git
-#   pip3 install tweepy
-#   pip3 install google-cloud-storage
-#   pip3 install google-cloud-pubsub
-#   mkdir /home/remyw/keys
-#   gsutil cp -r gs://mycredentials-rw/ /home/remyw/keys
-#   1.5) Use service account twitter-access...VM needs pubsub editor access, etc (just went ahead and gave it project editor access)
-#   2) put your twitter developer tokens/secrets in a GCS bucket (or copy them to the VM by some other means)
-#   3) execute: git clone https://github.com/remylouisew/twitter_streaming.git
-#   4) run this file: $python3 /home/remyw/twitter_streaming/app.py
-#   4) NEXT: run this file from (find path)...see if it works
+ 1) create VM on GCP (n1standard2), use initialization script in install python/git: 	
+   !  /bin/bash
+   sudo apt-get update
+   sudo apt-get install python3-pip
+   sudo apt-get install git
+   pip3 install tweepy
+   pip3 install google-cloud-storage
+   pip3 install google-cloud-pubsub
+   mkdir /home/remyw/keys
+   gsutil cp -r gs://mycredentials-rw/ /home/remyw/keys
+1.5) Use service account twitter-access...VM needs pubsub editor access, etc (just went ahead and gave it project editor access)
+2) put your twitter developer tokens/secrets in a GCS bucket (or copy them to the VM by some other means)
+3) execute: git clone https://github.com/remylouisew/twitter_streaming.git
+4) run this file: $ screen -S streaming_script python3 /home/remyw/twitter_streaming/app.py
+    https://linuxize.com/post/how-to-use-linux-screen/
+4) NEXT: 
+
+'''
 
 import datetime
 import json
@@ -60,6 +64,15 @@ except:
 # Hashtag list
 lst_hashtags = ["#got", "#gameofthrones"]
 
+'''
+       PubSub Notes:
+          - When using JSON over REST, message data must be base64-encoded
+          - Messages must be smaller than 10MB (after decoding)
+          - The message payload must not be empty
+          - Attributes can also be added to the publisher payload
+
+'''
+
 # Send the data to PubSub
 MY_PROJECT = "twitter-stream-rw"
 MY_PUBSUB_TOPIC = "twitter1"
@@ -90,7 +103,29 @@ def write_to_pubsub(data):
         print(e)
         raise
         
+def pubsub_callback( message_future ):
+    # When timeout is unspecified, the exception method waits indefinitely.
+    if message_future.exception(timeout=30):
+        print('[ ERROR ] Publishing message on {} threw an Exception {}.'.format(topic_name, message_future.exception()))
+    else:
+        print('[ INFO ] Result: {}'.format(message_future.result()))
 
+
+#can choose to stream directly to BQ instead (have not tested)
+def stream_to_bq( bq_client, bq_table, data ):
+    '''
+        bq_client    = bigquery.Client()
+        bq_table_ref = client.dataset(bq_dataset_id).table(bq_table_id)
+        bq_table     = client.get_table(table_ref)
+    '''
+    errors    = bq_client.insert_rows(bq_table, [tuple([ v for k,v in data.items() ])] )
+    if errors == []:
+        print('[ INFO ] Complete. Successfully inserted records into BigQuery')
+    else:
+        print('[ WARNING ] Failed to write records to BigQuery')
+    
+    return None
+  
 #Custom Listener class
 class StdOutListener(StreamListener):
     """ A listener handles tweets that are received from the stream.
