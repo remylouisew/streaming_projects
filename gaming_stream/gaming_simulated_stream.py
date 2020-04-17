@@ -7,7 +7,7 @@
 #
 #   Usage:
 '''
-python gaming_simulated_stream.py \
+python3 gaming_simulated_stream.py \
     --gcp_project twitter-stream-rw \
     --region us-central1 \
     --job_name 'gamelogs1' \
