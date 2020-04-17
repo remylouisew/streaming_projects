@@ -21,6 +21,7 @@ sleep 3
 pip3 install google-cloud-bigquery==1.12.1
 pip3 install google-cloud-pubsub==0.41.0
 pip3 install random-username==1.0.2
+pip3 install apache_beam[gcp] #must be gcp version
 
 # Create BigQuery Table
 echo ""
