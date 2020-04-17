@@ -1,4 +1,4 @@
-################################################################################################################
+i################################################################################################################
 #
 #   Google Cloud Dataflow
 #
@@ -10,9 +10,9 @@
 python gaming_simulated_stream.py \
     --gcp_project twitter-stream-rw \
     --region us-central1 \
-    --job_name 'gamelogs' \
-    --gcp_staging_location "gs://gaming-dataflow/staging" \
-    --gcp_tmp_location "gs://gaming-dataflow/tmp" \
+    --job_name 'gamelogs1' \
+    --gcp_staging_location "gs://game-staging-rw/temp" \
+    --gcp_tmp_location "gs://game-staging-rw/temp" \
     --batch_size 10 \
     --input_topic projects/twitter-stream-rw/topics/game-logs \
     --bq_dataset_name game_stream \
@@ -133,7 +133,7 @@ def run(argv=None):
         )
         
         # Print results to console (for testing/debugging)
-        transformed | 'Print aggregated game logs' >> beam.Map(print)
+        #transformed | 'Print aggregated game logs' >> beam.Map(print)
         
         # Sink/Persist to BigQuery
         parsed | 'Write to bq' >> beam.io.gcp.bigquery.WriteToBigQuery(
