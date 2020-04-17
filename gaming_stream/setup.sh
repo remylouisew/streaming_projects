@@ -1,4 +1,4 @@
-#Setup (assumes the gcloud and bq SKDs are installed)
+#Setup (assumes Python 3 (sudo apt-get install python3-git) and the gcloud and bq SKDs are installed)
 
 # Variables
 export GCP_PROJECT=twitter-stream-rw
@@ -18,9 +18,9 @@ sleep 3
 echo "Installing Dependencies..."
 sleep 3
 # Install python dependencies
-pip install google-cloud-bigquery==1.12.1
-pip install google-cloud-pubsub==0.41.0
-pip install random-username==1.0.2
+pip3 install google-cloud-bigquery==1.12.1
+pip3 install google-cloud-pubsub==0.41.0
+pip3 install random-username==1.0.2
 
 # Create BigQuery Table
 echo ""
