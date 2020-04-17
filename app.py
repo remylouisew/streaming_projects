@@ -6,7 +6,7 @@
 #
 # Steps:
  1) create VM on GCP (n1standard2), use initialization script in install python/git: 	
-   !  /bin/bash
+   #!  /bin/bash
    sudo apt-get update
    sudo apt-get install python3-pip
    sudo apt-get install git
