@@ -7,18 +7,18 @@
 #
 #   Usage:
 '''
-python gaming_dataflow.py \
-    --gcp_project gaming-demos \
+python gaming_simulated_stream.py \
+    --gcp_project twitter-stream-rw \
     --region us-central1 \
     --job_name 'gamelogs' \
     --gcp_staging_location "gs://gaming-dataflow/staging" \
     --gcp_tmp_location "gs://gaming-dataflow/tmp" \
     --batch_size 10 \
-    --input_topic projects/gaming-demos/topics/game-logs \
-    --bq_dataset_name streaming \
-    --bq_table_name game_logs \
-    --runner DirectRunner
+    --input_topic projects/twitter-stream-rw/topics/game-logs \
+    --bq_dataset_name game_stream \
+    --bq_table_name game_stream \
     --runner DataflowRunner &
+     #--runner DirectRunner
 '''
 #
 ################################################################################################################
