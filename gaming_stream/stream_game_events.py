@@ -1,7 +1,7 @@
 
 '''
 USAGE:
-python ./stream_game_events.py --project_id gaming-demos --bq_dataset_id streaming --bq_table_id game_logs --pubsub_topic game-logs --sink pubsub --number_of_records 10 --delay 2
+python ./stream_game_events.py --project_id twitter-stream-rw --bq_dataset_id game_stream --bq_table_id game_stream --pubsub_topic game-logs --sink pubsub --number_of_records 10 --delay 2
 '''
 
 import os,sys,csv
