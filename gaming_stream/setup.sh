@@ -1,7 +1,7 @@
 #Setup (assumes Python 3 (sudo apt-get install python3-git) and the gcloud and bq SKDs are installed)
 
 # Variables
-export GCP_PROJECT=twitter-stream-rw
+export GCP_PROJECT=remy-sandbox
 export BIGQUERY_DATASET=game_stream
 export BIGQUERY_TABLE=game_stream
 export PUBSUB_TOPIC=game-logs
