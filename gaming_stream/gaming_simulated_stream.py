@@ -12,7 +12,7 @@ python3 gaming_simulated_stream.py \
     --region us-central1 \
     --job_name 'gamelogs1' \
     --gcp_staging_location "gs://dataflow-rw/stream-staging" \
-    --gcp_tmp_location "gs://gs://dataflow-rw/stream-staging" \
+    --gcp_tmp_location "gs://dataflow-rw/stream-staging" \
     --batch_size 10 \
     --input_topic projects/remy-sandbox/topics/game-logs \
     --bq_dataset_name game_stream \
