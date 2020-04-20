@@ -8,13 +8,13 @@
 #   Usage:
 '''
 python3 gaming_simulated_stream.py \
-    --gcp_project twitter-stream-rw \
+    --gcp_project remy-sandbox \
     --region us-central1 \
     --job_name 'gamelogs1' \
-    --gcp_staging_location "gs://game-staging-rw/temp" \
-    --gcp_tmp_location "gs://game-staging-rw/temp" \
+    --gcp_staging_location "gs://dataflow-rw/stream-staging" \
+    --gcp_tmp_location "gs://gs://dataflow-rw/stream-staging" \
     --batch_size 10 \
-    --input_topic projects/twitter-stream-rw/topics/game-logs \
+    --input_topic projects/remy-sandbox/topics/game-logs \
     --bq_dataset_name game_stream \
     --bq_table_name game_stream \
     --runner DataflowRunner &
