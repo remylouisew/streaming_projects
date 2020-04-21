@@ -10,7 +10,7 @@
 python3 gaming_simulated_stream.py \
     --gcp_project remy-sandbox \
     --region us-central1 \
-    --job_name 'gamelogs1' \
+    --job_name 'gamelogs2' \
     --gcp_staging_location "gs://dataflow-rw/stream-staging" \
     --gcp_tmp_location "gs://dataflow-rw/stream-staging" \
     --batch_size 10 \
