@@ -43,10 +43,7 @@ echo ""
 echo "Creating PubSub Subscription called $PUBSUB_TOPIC-sub"
 sleep 3
 gcloud pubsub subscriptions create --topic $PUBSUB_TOPIC $PUBSUB_TOPIC-sub
-
-# Setup Dataflow Project (PubSub Subscription > BigQuery Streaming)
-# I'm currently doing this manually within the GCP Console, under Dataflow.
-# Planning to add the CLI option here. 
+ 
 
 echo ""
 echo "Setup Complete"
