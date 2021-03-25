@@ -53,7 +53,7 @@ from apache_beam.io import ReadFromText
 from apache_beam.io import WriteToText
 from past.builtins import unicode
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/Users/remyw/Documents/GCP Files/keys/game-demo-SA-key.json"
+#os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/Users/remyw/Documents/GCP Files/keys/game-demo-SA-key.json"
 
 ################################################################################################################
 #
