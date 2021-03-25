@@ -118,6 +118,7 @@ def run(argv=None):
           '--staging_location={}'.format(known_args.gcp_staging_location),  # Google Cloud Storage gs:// path
           '--temp_location={}'.format(known_args.gcp_tmp_location),         # Google Cloud Storage gs:// path
           '--job_name=' + str(known_args.job_name),
+          '--region={}'.format(known_args.region),
       ])
     
     pipeline_options = PipelineOptions(pipeline_args)
