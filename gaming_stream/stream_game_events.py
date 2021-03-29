@@ -2,6 +2,15 @@
 '''
 USAGE:
 python3 ./stream_game_events.py --project_id remy-sandbox --bq_dataset_id game_stream --bq_table_id game_stream --pubsub_topic game-logs --sink pubsub --number_of_records 10 --delay 2
+OR
+python3.7 gaming_stream/stream_game_events.py \
+ --project_id remy-sandbox \
+ --bq_dataset_id game_stream \
+ --bq_table_id game_stream \
+ --pubsub_topic game-logs \
+ --sink pubsub \
+ --number_of_records 10000 \
+ --delay 0.0001 #1000 records per sec
 '''
 
 import os,sys,csv
