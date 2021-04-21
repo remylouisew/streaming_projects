@@ -18,9 +18,9 @@ sleep 3
 echo "Installing Dependencies..."
 sleep 3
 # Install python dependencies
-pip3 install google-cloud-bigquery==1.12.1
-pip3 install google-cloud-pubsub==0.41.0
-pip3 install random-username==1.0.2
+pip3 install google-cloud-bigquery
+pip3 install google-cloud-pubsub
+pip3 install random-username
 pip3 install apache_beam[gcp] #must be gcp version
 
 # Create BigQuery Table
