@@ -1,8 +1,9 @@
 
 '''
 USAGE:
+#update to your own BQ table!
 
-python3.7 gaming_stream/stream_game_events.py \
+python3.7 stream_events.py \
  --project_id northam-ce-summit-sandbox2 \
  --bq_dataset_id game_stream \
  --bq_table_id game_stream \
