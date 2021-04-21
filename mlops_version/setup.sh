@@ -1,7 +1,7 @@
 #Setup (assumes Python 3 (sudo apt-get install python3-git) and the gcloud and bq SKDs are installed)
 
 # Variables
-export GCP_PROJECT=remy-sandbox
+export GCP_PROJECT=northam-ce-summit-sandbox2
 export BIGQUERY_DATASET=game_stream
 export BIGQUERY_TABLE=game_stream
 export PUBSUB_TOPIC=game-logs
@@ -48,4 +48,4 @@ gcloud pubsub subscriptions create --topic $PUBSUB_TOPIC $PUBSUB_TOPIC-sub
 echo ""
 echo "Setup Complete"
 
-#ZEND
+#END
