@@ -1,4 +1,4 @@
-## MLOPS study group, use the scripts in the MLOPS_Version folder
+## MLOPS study group, use the scripts in the MLOPS_Version folder, not this one
 
 Steps to set up the streaming job in your own project:
 
