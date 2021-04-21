@@ -8,13 +8,13 @@
 #   Usage:
 '''
 python3 game_stream_dataflow.py \
-    --gcp_project remy-sandbox \
+    --gcp_project northam-ce-summit-sandbox2 \
     --region us-central1 \
     --job_name 'gamelogs3' \
-    --gcp_staging_location "gs://dataflow-rw/stream-staging" \
-    --gcp_tmp_location "gs://dataflow-rw/stream-staging/tmp" \
+    --gcp_staging_location "gs://mlops-stream8/stream-staging" \
+    --gcp_tmp_location "gs://mlops-stream8/stream-staging/tmp" \
     --batch_size 10 \
-    --input_topic projects/remy-sandbox/topics/game-logs \
+    --input_topic projects/northam-ce-summit-sandbox2/topics/game-logs \
     --bq_dataset_name game_stream \
     --bq_table_name game_stream \
     --runner DataflowRunner \
@@ -23,15 +23,6 @@ python3 game_stream_dataflow.py \
     --autoscalingAlgorithm NONE
      #--runner DataflowRunner &
 
-
-     next:figure out how to run with args
-
-Steps to get it to run:
-
-1.If you need to setup from scratch, use the setup.sh here to create pubsub/bq table in project, then install packages on your own machine
-2.Run the dataflow script to start the job from bash using the arguments at the top of the script - /Users/remyw/Documents/Code Projects/Twitter stream/twitter_workspace/twitter_streaming/game_stream_dataflow.py
-3.Wait a few minutes for it to get up and running
-4.Run the stream_game_events.py script from VS Code. This will generate 100 events to pubsub, which will then get picked up by the dataflow job
 
 '''
 #
@@ -53,7 +44,7 @@ from apache_beam.io import ReadFromText
 from apache_beam.io import WriteToText
 from past.builtins import unicode
 
-#os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/Users/remyw/Documents/GCP Files/keys/game-demo-SA-key.json"
+#os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/"
 
 ################################################################################################################
 #
@@ -180,8 +171,6 @@ if __name__ == '__main__':
 
 
 
-'''
-python ./stream_game_events.py --project_id gaming-demos --bq_dataset_id streaming --bq_table_id game_logs --pubsub_topic game-logs --sink pubsub --number_of_records 10 --delay 2
-'''
+
 
 
