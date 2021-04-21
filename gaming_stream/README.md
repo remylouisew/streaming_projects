@@ -1,3 +1,5 @@
+## MLOPS study group, use the scripts in the MLOPS_Version folder
+
 Steps to set up the streaming job in your own project:
 
 1) If you need to setup from scratch, use the setup.sh to create pubsub + bq tables in your project, then install packages on your own machine/ VM
@@ -7,7 +9,7 @@ Steps to set up the streaming job in your own project:
 
 How to generate events:
 
-1) Change  
+1) Change BQ table to your own table 
 2) Run the stream_game_events.py script.
 3) Change the following arguments to match what you need:
  --number_of_records 10000 = 10,000 total records will be generated
