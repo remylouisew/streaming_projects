@@ -9,7 +9,7 @@ Steps to set up the streaming job in your own project:
 
 How to generate events:
 
-1) Change BQ table to your own table 
+1) Change BQ table to your own table in stream_game_events.py
 2) Run the stream_game_events.py script.
 3) Change the following arguments to match what you need:
  --number_of_records 10000 = 10,000 total records will be generated
